@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import Sidebar from "../components/layouts/Sidebar";
-import Navbar from "../components/layouts/Navbar";
 import { userMenu } from "../components/layouts/menu/customer.menu";
+import NavbarCustomer from "../components/layouts/NavbarCustomer";
 
 export default function CustomerLayout ({
     children
@@ -28,7 +28,7 @@ export default function CustomerLayout ({
       />
 
       <div className="flex-grow-1 d-flex flex-column main-content">
-        <Navbar
+        <NavbarCustomer
           onToggleSidebar={() => setSidebarOpen((prev) => !prev)}
           onToggleCollapse={() => setCollapsed((prev) => !prev)}
         />

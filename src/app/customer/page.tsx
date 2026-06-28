@@ -5,6 +5,16 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { IProduct } from "../admin/product/page"
 
+export interface ICustomer {
+    id: number
+    username: string
+    address: string
+    noTelp: string
+    created_at: string
+    updated_at: string
+}
+
+
 export default function DashboardCustomer () {
 
     const [products, setProducts] = useState<IProduct[]>([])
@@ -32,15 +42,15 @@ export default function DashboardCustomer () {
                                 unoptimized
                                 alt=""
                                 src={`${baseURL}/image/${product.image}`}
-                                width={280}
+                                width={300}
                                 height={200}
                             />
                             <div className="card-body">
                                 <h5 className="card-title">{product.name}</h5>
                                 <p className="card-text">{product.type}</p>
+                                <p className="card-text">{product.price}</p>
                                 <div className="d-flex gap-1">
-                                    <button className="btn btn-primary">Detail</button>
-                                    <button className="btn btn-danger">Beli</button>
+                                    <button className="btn btn-success">Beli</button>
                                 </div>
                             </div>
                         </div>

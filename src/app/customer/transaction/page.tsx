@@ -3,7 +3,6 @@
 import { api, baseURL } from "@/lib/axios"
 import { useEffect, useState } from "react"
 import { ICustomer } from "@/app/customer/page"
-import Link from "next/link"
 
 export interface ITransaction {
     id: number
@@ -14,7 +13,7 @@ export interface ITransaction {
     customer: ICustomer
 }
 
-export default function TransactionPage () {
+export default function TransactionCustomerPage () {
 
     const [transactions, setTransactions] = useState<ITransaction[]>([])
 
@@ -33,10 +32,6 @@ export default function TransactionPage () {
 
     return (
         <div>
-            <h4>Data Transaction</h4>
-            <Link href={'/admin/transaction/create'}>
-                <button type="button" className="btn btn-primary">Tambah Transaction</button>
-            </Link>
             <table className="table mt-4 table-hover">
                 <thead>
                     <tr>
