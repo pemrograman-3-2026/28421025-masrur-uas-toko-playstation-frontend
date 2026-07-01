@@ -6,6 +6,7 @@ import { ICustomer } from "@/app/customer/page"
 import { IProduct } from "../product/page"
 import { ITransaction } from "../transaction/page"
 import Link from "next/link"
+import { showToast } from "@/app/components/toast/Toast"
 
 export interface IPayment {
     id: number
@@ -35,6 +36,20 @@ export default function PaymentPage () {
         getData()
     }, [])
 
+    const deleteData = async (id: number) => {
+        const isAgree = confirm('Are your sure?')
+    
+        if (isAgree) {
+            try {
+                const res = await api.delete(`payment/delete/${id}`)
+                showToast(res.data.message, 'success')
+                getData()
+            } catch (error: any) {
+                showToast(error.response.data.message, 'danger')
+            }
+        }
+    }
+
     return (
         <div>
             <h4>Data Payment</h4>
@@ -49,6 +64,7 @@ export default function PaymentPage () {
                         <td>Product</td>
                         <td>Price</td>
                         <td>Payment Method</td>
+                        <td>Action</td>
                     </tr>
                 </thead>
 
@@ -61,6 +77,11 @@ export default function PaymentPage () {
                                 <td>{payment.product.name}</td>
                                 <td>{payment.product.price}</td>
                                 <td>{payment.transaction.paymentMethod}</td>
+                                <td>
+                                    <div className="d-flex gap-2">
+                                        <button onClick={() => deleteData(payment.id)} type="button" className="btn btn-danger">Delete</button>
+                                    </div>
+                                </td>
                             </tr>
                         )
                     })}

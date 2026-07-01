@@ -4,6 +4,7 @@ import { api, baseURL } from "@/lib/axios"
 import { useEffect, useState } from "react"
 import { ICustomer } from "@/app/customer/page"
 import Link from "next/link"
+import { showToast } from "@/app/components/toast/Toast"
 
 export interface ITransaction {
     id: number
@@ -31,6 +32,20 @@ export default function TransactionPage () {
         getData()
     }, [])
 
+    const deleteData = async (id: number) => {
+            const isAgree = confirm('Are your sure?')
+    
+            if (isAgree) {
+                try {
+                    const res = await api.delete(`transaction/delete/${id}`)
+                    showToast(res.data.message, 'success')
+                    getData()
+                } catch (error: any) {
+                    showToast(error.response.data.message, 'danger')
+                }
+            }
+        }
+
     return (
         <div>
             <h4>Data Transaction</h4>
@@ -44,6 +59,7 @@ export default function TransactionPage () {
                         <td>Amount</td>
                         <td>Payment Method</td>
                         <td>Transaction Date</td>
+                        <td>Action</td>
                     </tr>
                 </thead>
 
@@ -55,6 +71,11 @@ export default function TransactionPage () {
                                 <td>{transaction.amount}</td>
                                 <td>{transaction.paymentMethod}</td>
                                 <td>{transaction.transactionDate}</td>
+                                <td>
+                                    <div className="d-flex gap-2">
+                                        <button onClick={() => deleteData(transaction.id)} type="button" className="btn btn-danger">Delete</button>
+                                    </div>
+                                </td>
                             </tr>
                         )
                     })}

@@ -58,7 +58,7 @@ export default function ProductPage () {
                         <td>Type</td>
                         <td>Price</td>
                         <td>Image</td>
-                        <td>Aksi</td>
+                        <td>Action</td>
                     </tr>
                 </thead>
 
@@ -74,7 +74,6 @@ export default function ProductPage () {
                                 </td>
                                 <td>
                                     <div className="d-flex gap-2">
-                                        <button type="button" className="btn btn-warning">Edit</button>
                                         <button onClick={() => deleteData(product.id)} type="button" className="btn btn-danger">Delete</button>
                                     </div>
                                 </td>
